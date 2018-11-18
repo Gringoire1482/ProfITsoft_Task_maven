@@ -7,9 +7,10 @@ public class Indemnitee extends AbstractClient {
     private LocalDate dateOfBirth;
     private double cost;
 
-    public Indemnitee(String fullname, LocalDate dateOfBirth, long id) {
+    public Indemnitee(String fullname, LocalDate dateOfBirth,double cost, long id) {
 
         super(fullname, id);
+        this.cost=cost;
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -23,18 +24,19 @@ public class Indemnitee extends AbstractClient {
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(dateOfBirth, cost);
+    public String toString() {
+        return "Indemnitee{" +  System.lineSeparator()+
+                "dateOfBirth=" + dateOfBirth +  System.lineSeparator()+
+                ", cost=" + cost +  System.lineSeparator()+
+                ", fullName='" + fullName + '\'' +  System.lineSeparator()+
+                ", id=" + id +  System.lineSeparator()+
+                '}';
     }
 
     @Override
-    public String toString() {
-        return "Indemnitee{" + System.lineSeparator() +
-                "dateOfBirth=" + dateOfBirth + System.lineSeparator() +
-                "cost=" + cost + System.lineSeparator() +
-                "fullName='" + fullName + '\'' + System.lineSeparator() +
-                '}';
+    public int hashCode() {
+
+        return Objects.hash(dateOfBirth, cost);
     }
 
     public LocalDate getDateOfBirth() {

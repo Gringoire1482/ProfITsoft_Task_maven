@@ -1,7 +1,10 @@
 package entity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import entity.clients.Client;
@@ -17,9 +20,11 @@ public class Contract {
     private List<Indemnitee> indemnitees;
     private static Comparator<Indemnitee> nameSort;
     private static Comparator<Indemnitee> dateOfBirthSort;
+   private static  DateTimeFormatter formatter;
 
     static {
         nameSort = Comparator.comparing(n -> n.getFullName().toUpperCase());
+        formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         dateOfBirthSort = Comparator.comparing(Indemnitee::getDateOfBirth);
     }
 
@@ -120,22 +125,58 @@ public class Contract {
             System.out.println(indemnitees);
         }
     }
-    public void  sortByDateOfBirth(){
+
+    public void sortByDateOfBirth() {
         indemnitees.sort(dateOfBirthSort);
         indemnitees.forEach(System.out::println);
     }
-    public Indemnitee getById(long id){
+
+    public Indemnitee getById(long id) {
 
         for (Indemnitee a : indemnitees) {
-          if(a.getId()== id)return a;
+            if (a.getId() == id) return a;
         }
         return null;
     }
 
+    public static List<Contract> loadFromFile(String filepath) {
+        List<Contract> contractList = new ArrayList<>();
+        Contract contract;
+        Client client;
+        List<Indemnitee> indemnitees;
+        String[] strings;
+        try {
+            Scanner scanner = new Scanner(new File(filepath), "cp1251");
+            while (scanner.hasNext()) {
+                strings = scanner.nextLine().split(",");
+                LocalDate s = LocalDate.parse(strings[1], formatter);
+                LocalDate st = LocalDate.parse(strings[2], formatter);
+                LocalDate e = LocalDate.parse(strings[3], formatter);
+                client = new Client(strings[4], ClientType.valueOf(strings[5]), strings[6], Long.valueOf(strings[7]));
+                contract = new Contract(Integer.valueOf(strings[0]), s, st, e,client);
+                String [] indemnitiesInfo = new String[strings.length-8];
+                System.arraycopy(strings,8,indemnitiesInfo,0,strings.length-8);
+                contract.setIndemnitees(readIndemnities(indemnitiesInfo));
+                contractList.add(contract);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return contractList;
+    }
+    public static List<Indemnitee> readIndemnities(String[] data){
+        List<Indemnitee> result= new ArrayList<>();
+        for (int i=0;i<data.length;i+=4){
+            //System.out.println(data[i] +" "+data[i+1]+ " "+data[i+2]+ data[i+3]);
+          result.add(new Indemnitee(data[i],LocalDate.parse(data[i+1],formatter),Double.valueOf(data[i+2]),Long.valueOf(data[i+3])));
+        }
+        return  result;
+    }
+
     public static void main(String[] args) {
-        Client a = new Client("Ivanov Ivan Ivanovich", ClientType.PRIVATE, "Gagarina 10",1);
-        Indemnitee first = new Indemnitee("Ivanov Oleg Ivanovich", LocalDate.of(1980, Month.AUGUST, 12),10);
-        Indemnitee second = new Indemnitee("Ivanova Anna Ivanovna", LocalDate.of(1998, Month.AUGUST, 16),20);
+        Client a = new Client("Ivanov Ivan Ivanovich", ClientType.PRIVATE, "Gagarina 10", 1);
+        Indemnitee first = new Indemnitee("Ivanov Oleg Ivanovich", LocalDate.of(1980, Month.AUGUST, 12), 1000,10);
+        Indemnitee second = new Indemnitee("Ivanova Anna Ivanovna", LocalDate.of(1998, Month.AUGUST, 16), 2000,20);
         first.setCost(1000);
         second.setCost(500);
         List<Indemnitee> indemnitees = new ArrayList<>();
@@ -149,6 +190,9 @@ public class Contract {
         System.out.println(contract);
         System.out.println(contract.getFullCost());
         first.fullNameToInitialsParser();
-
+       List<Contract> contractsList= loadFromFile("input.csv");
+       for(Contract b: contractsList){
+           System.out.println(b);
+       }
     }
 }

@@ -24,11 +24,9 @@ public class ContractTest {
 
     @Before
     public void setUp() throws Exception {
-        Client a = new Client("Ivanov Ivan Ivanovich", ClientType.PRIVATE, "Gagarina 10",1);
-       first = new Indemnitee("Ivanov Oleg Ivanovich", LocalDate.of(1980, Month.AUGUST, 12),10);
-       second = new Indemnitee("Ivanova Anna Ivanovna", LocalDate.of(1998, Month.AUGUST, 16),20);
-        first.setCost(1000);
-        second.setCost(500);
+        Client a = new Client("Ivanov Ivan Ivanovich", ClientType.PRIVATE, "Gagarina 10",10);
+       first = new Indemnitee("Ivanov Oleg Ivanovich", LocalDate.of(1980, Month.AUGUST, 12),1000,10);
+       second = new Indemnitee("Ivanova Anna Ivanovna", LocalDate.of(1998, Month.AUGUST, 16),2000,20);
      indemnitees = new ArrayList<>();
         indemnitees.add(second);
         indemnitees.add(first);
@@ -62,6 +60,12 @@ public class ContractTest {
 
     @Test
     public void getFullCost() {
-        assertEquals(1500, contract.getFullCost(),0);
+        assertEquals(3000, contract.getFullCost(),0);
+    }
+
+    @Test
+    public void loadFromFile() {
+        List<Contract> contracts = Contract.loadFromFile("test.csv");
+        assertEquals(contract,contracts.get(0));
     }
 }

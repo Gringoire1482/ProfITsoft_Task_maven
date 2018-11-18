@@ -34,10 +34,11 @@ public class Client extends AbstractClient {
 
     @Override
     public String toString() {
-        return "Client{" + System.lineSeparator()+
-                "type=" + type +  System.lineSeparator()+
-                "address='" + address + '\'' +  System.lineSeparator()+
-                "fullName='" + fullName + '\'' + System.lineSeparator()+
+        return "Client{" +
+                "type=" + type +
+                ", address='" + address + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", id=" + id +
                 '}';
     }
 
