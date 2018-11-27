@@ -1,4 +1,6 @@
-package entity.clients;
+package service.clients;
+
+import dict.ClientType;
 
 import java.util.Objects;
 

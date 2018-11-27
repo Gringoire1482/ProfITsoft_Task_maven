@@ -1,4 +1,4 @@
-package entity.clients;
+package dict;
 
 public enum ClientType {
     JURIDIC, PRIVATE

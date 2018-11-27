@@ -1,4 +1,4 @@
-package entity.clients;
+package service.clients;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -55,13 +55,13 @@ public class Indemnitee extends AbstractClient {
         this.cost = cost;
     }
 
-    public void fullNameToInitialsParser() {
+    public String fullNameToInitialsParser() {
         String[] parts = fullName.split(" ");
         StringBuilder result = new StringBuilder(parts[0]).append(" ");
         for (int i = 1; i < parts.length; i++) {
             result.append(parts[i].charAt(0)).append(". ");
         }
-        System.out.println(result);
+       return result.toString();
     }
 
 

@@ -1,8 +1,10 @@
 package entity;
 
-import entity.clients.Client;
-import entity.clients.ClientType;
-import entity.clients.Indemnitee;
+import dao.FileLoad;
+import service.Contract;
+import service.clients.Client;
+import dict.ClientType;
+import service.clients.Indemnitee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +13,6 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -65,7 +66,7 @@ public class ContractTest {
 
     @Test
     public void loadFromFile() {
-        List<Contract> contracts = Contract.loadFromFile("test.csv");
+        List<Contract> contracts = new FileLoad("data/test.csv").loadFromFile();
         assertEquals(contract,contracts.get(0));
     }
 }
