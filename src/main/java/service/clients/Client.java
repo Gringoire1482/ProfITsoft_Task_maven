@@ -1,13 +1,14 @@
 package service.clients;
 
+import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import dict.ClientType;
 
+import javax.sql.DataSource;
 import java.util.Objects;
 
 public class Client extends AbstractClient {
     private ClientType type;
     private String address;
-
     public Client(String fullname, ClientType type, String address,long id) {
         super(fullname,id);
         this.type = type;
@@ -42,6 +43,29 @@ public class Client extends AbstractClient {
                 ", fullName='" + fullName + '\'' +
                 ", id=" + id +
                 '}';
+    }
+
+    public Client() {
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+    }
+
+    @Override
+    public void setFullName(String fullName) {
+        super.setFullName(fullName);
+    }
+
+    @Override
+    public String getFullName() {
+        return super.getFullName();
+    }
+
+    @Override
+    public long getId() {
+        return super.getId();
     }
 
     public void setType(ClientType type) {

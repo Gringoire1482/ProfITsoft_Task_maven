@@ -1,0 +1,20 @@
+<dataset>
+    <table name="clients">
+        <column>ID</column>
+        <column>NAME</column>
+        <column>CLIENT_TYPE</column>
+        <column>ADDRESS</column>
+        <row>
+            <value>1000</value>
+            <value>John Doe</value>
+            <value>PRIVATE</value>
+            <value>Brighton Beach</value>
+        </row>
+        <row>
+            <value>1001</value>
+            <value>Paco Alcacer</value>
+            <value>PRIVATE</value>
+            <value>westfalenstraße 10</value>
+        </row>
+    </table>
+</dataset>

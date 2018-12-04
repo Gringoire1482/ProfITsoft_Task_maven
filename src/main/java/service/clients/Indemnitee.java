@@ -55,6 +55,29 @@ public class Indemnitee extends AbstractClient {
         this.cost = cost;
     }
 
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+    }
+
+    @Override
+    public void setFullName(String fullName) {
+        super.setFullName(fullName);
+    }
+
+    @Override
+    public String getFullName() {
+        return super.getFullName();
+    }
+
+    @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    public Indemnitee() {
+    }
+
     public String fullNameToInitialsParser() {
         String[] parts = fullName.split(" ");
         StringBuilder result = new StringBuilder(parts[0]).append(" ");

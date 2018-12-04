@@ -1,1 +1,13 @@
-entity\Runner.class
+dao\Constants.class
+dict\ClientType.class
+dao\DatabaseException.class
+dao\ConnectionFactory.class
+dao\mysql\MySQLContractDAO.class
+service\Contract.class
+service\clients\Indemnitee.class
+dao\FileLoad.class
+service\clients\AbstractClient.class
+service\clients\Client.class
+dao\GenericDAO.class
+dao\mysql\MySQLIndemniteeDAO.class
+dao\mysql\MySQLClientDAO.class

@@ -66,7 +66,7 @@ public class ContractTest {
 
     @Test
     public void loadFromFile() {
-        List<Contract> contracts = new FileLoad("data/test.csv").loadFromFile();
+        List<Contract> contracts = new FileLoad("src/main/java/data/test.csv").loadFromFile();
         assertEquals(contract,contracts.get(0));
     }
 }

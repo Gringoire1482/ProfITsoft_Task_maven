@@ -10,7 +10,7 @@ import service.clients.Client;
 import service.clients.Indemnitee;
 
 public class Contract {
-    private int id;
+    private long id;
     private LocalDate signed;
     private LocalDate startDate;
     private LocalDate expireDate;
@@ -26,7 +26,10 @@ public class Contract {
         dateOfBirthSort = Comparator.comparing(Indemnitee::getDateOfBirth);
     }
 
-    public Contract(int id, LocalDate signed, LocalDate startDate, LocalDate expireDate, Client client) {
+    public Contract() {
+    }
+
+    public Contract(long id, LocalDate signed, LocalDate startDate, LocalDate expireDate, Client client) {
         this.id = id;
         this.signed = signed;
         this.startDate = startDate;
@@ -65,11 +68,11 @@ public class Contract {
                 '}';
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -136,14 +139,7 @@ public class Contract {
     }
 
 
-    public static List<Indemnitee> readIndemnities(String[] data) {
-        List<Indemnitee> result = new ArrayList<>();
-        for (int i = 0; i < data.length; i += 4) {
 
-            result.add(new Indemnitee(data[i], LocalDate.parse(data[i + 1], formatter), Double.valueOf(data[i + 2]), Long.valueOf(data[i + 3])));
-        }
-        return result;
-    }
 
 
 }
